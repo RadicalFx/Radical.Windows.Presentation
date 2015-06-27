@@ -43,6 +43,14 @@
     <DocumentationFile>bin\Release\Radical.Windows.Presentation.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Radical, Version=1.5.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Radical.1.5.2.1\lib\net40\Radical.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Radical.Windows, Version=1.3.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Radical.Windows.1.3.16.0\lib\net40\Radical.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -50,7 +58,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Expression.Blend.Sdk.1.0.2\lib\net40-client\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Radical.Windows.1.3.16.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -60,9 +69,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
-      <Link>Properties\Radical.AssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AbstractMementoViewModel.cs" />
     <Compile Include="Behaviors\Focus.cs" />
     <Compile Include="Behaviors\FrameworkElementLifecycleNotificationsBehavior.cs" />
@@ -165,16 +171,6 @@
     <Compile Include="SplashScreenViewModel.cs" />
     <Compile Include="Tracing.cs" />
     <Compile Include="Wait.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
-      <Project>{8AD2DC17-392C-4BBE-B34B-11A3ACB9DC86}</Project>
-      <Name>Radical.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Radical\Radical.csproj">
-      <Project>{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}</Project>
-      <Name>Radical</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

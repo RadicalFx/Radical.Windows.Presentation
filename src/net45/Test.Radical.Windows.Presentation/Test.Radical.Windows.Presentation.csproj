@@ -41,13 +41,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.2.1506.2515, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moq.4.2.1506.2515\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Radical, Version=1.5.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Radical.1.5.2.1\lib\net45\Radical.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Radical.Windows, Version=1.3.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Radical.Windows.1.3.16.0\lib\net45\Radical.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Radical.Windows.1.3.16.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -77,14 +90,6 @@
     <ProjectReference Include="..\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
       <Project>{767fad7d-a6cf-426e-ac34-6ea187c76ff9}</Project>
       <Name>Radical.Windows.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
-      <Project>{135504b6-2a47-4e30-994e-60bc49477091}</Project>
-      <Name>Radical.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Radical\Radical.csproj">
-      <Project>{db4e99f1-3cbe-4e76-9197-d6f884a0f618}</Project>
-      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
