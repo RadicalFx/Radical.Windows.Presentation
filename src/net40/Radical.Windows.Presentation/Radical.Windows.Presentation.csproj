@@ -121,7 +121,6 @@
     <Compile Include="Messaging\ViewModelClosing.cs" />
     <Compile Include="Messaging\ViewModelClosed.cs" />
     <Compile Include="Messaging\ViewModelLoaded.cs" />
-    <Compile Include="Properties\NugetInfo.cs" />
     <Compile Include="PropertyValidationState.cs" />
     <Compile Include="Regions\RegionExtensions.cs" />
     <Compile Include="Regions\RegionManagerFactory.cs" />
