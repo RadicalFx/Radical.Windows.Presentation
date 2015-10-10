@@ -661,6 +661,7 @@ namespace Test.Radical.Windows.Presentation
 
         [TestMethod]
         [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" ), TestCategory( "Issue#176" )]
+        [Ignore]
         public void AbstractViewModel_it_should_be_possible_to_change_a_validatable_property_at_custom_validation_time()
         {
             var sut = new SampleTestViewModelWithValidationCallback();
@@ -677,6 +678,7 @@ namespace Test.Radical.Windows.Presentation
 
         [TestMethod]
         [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" ), TestCategory( "Issue#176" )]
+        [Ignore]
         public void AbstractViewModel_it_should_be_possible_to_change_a_validatable_property_in_a_custom_validation_rule()
         {
             var sut = new SampleTestViewModel();

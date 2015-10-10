@@ -37,8 +37,6 @@ using System.Runtime.InteropServices;
 //    // app, or any theme specific resource dictionaries)
 //)]
 
-//This is the real build number used for references
-[assembly: AssemblyVersion( "1.10.3.1" )]
-
-//This build number should always be equal to the used AssemblyVersion, currently is not used.
-[assembly: AssemblyFileVersion( "1.10.3.1" )]
+[assembly: AssemblyVersion( "1.0.0.0" )]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0.0")]

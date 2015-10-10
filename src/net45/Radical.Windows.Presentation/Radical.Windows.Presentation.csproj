@@ -263,9 +263,6 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\NugetInfo.cs">
-      <Link>Properties\NugetInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\XmlnsDefinitions.cs">
       <Link>Properties\XmlnsDefinitions.cs</Link>
     </Compile>
