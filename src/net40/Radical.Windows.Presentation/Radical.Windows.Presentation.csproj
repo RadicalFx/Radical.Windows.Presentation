@@ -72,10 +72,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractMementoViewModel.cs" />
+    <Compile Include="ApplicationBootstrapper.cs" />
     <Compile Include="Behaviors\Focus.cs" />
     <Compile Include="Behaviors\FrameworkElementLifecycleNotificationsBehavior.cs" />
     <Compile Include="Behaviors\DependencyObjectCloseHandlerBehavior.cs" />
     <Compile Include="Behaviors\WindowLifecycleNotificationsBehavior.cs" />
+    <Compile Include="Boot\Installers\DefaultDescriptor.cs" />
+    <Compile Include="Boot\Installers\PresentationDescriptor.cs" />
+    <Compile Include="Boot\Installers\ServicesDescriptor.cs" />
+    <Compile Include="Boot\Installers\UICompositionInstaller.cs" />
+    <Compile Include="Boot\PuzzleComponentReleaser.cs" />
+    <Compile Include="Boot\PuzzleContainerBootstrapper.cs" />
     <Compile Include="Boot\SplashScreenConfiguration.cs" />
     <Compile Include="Boot\ApplicationBootstrapper.cs" />
     <Compile Include="Boot\ApplicationShutdownArgs.cs" />
@@ -86,6 +93,7 @@
     <Compile Include="Boot\IExpectBootCallback.cs" />
     <Compile Include="Boot\SingletonApplicationScope.cs" />
     <Compile Include="Boot\SingletonApplicationStartupArgs.cs" />
+    <Compile Include="ComponentModel\IContainerBootstrapper.cs" />
     <Compile Include="ComponentModel\IReleaseComponents.cs" />
     <Compile Include="ComponentModel\IViewModelResolver.cs" />
     <Compile Include="ComponentModel\IgnorePropertyInjectionAttribue.cs" />

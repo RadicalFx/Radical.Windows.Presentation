@@ -79,6 +79,9 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\AbstractViewModel.cs">
       <Link>AbstractViewModel.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ApplicationBootstrapper.cs">
+      <Link>ApplicationBootstrapper.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Behaviors\DependencyObjectCloseHandlerBehavior.cs">
       <Link>Behaviors\DependencyObjectCloseHandlerBehavior.cs</Link>
     </Compile>
@@ -112,6 +115,24 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\IExpectShutdownCallback.cs">
       <Link>Boot\IExpectShutdownCallback.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\Installers\DefaultDescriptor.cs">
+      <Link>Boot\Installers\DefaultDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\Installers\PresentationDescriptor.cs">
+      <Link>Boot\Installers\PresentationDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\Installers\ServicesDescriptor.cs">
+      <Link>Boot\Installers\ServicesDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\Installers\UICompositionInstaller.cs">
+      <Link>Boot\Installers\UICompositionInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\PuzzleComponentReleaser.cs">
+      <Link>Boot\PuzzleComponentReleaser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\PuzzleContainerBootstrapper.cs">
+      <Link>Boot\PuzzleContainerBootstrapper.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\SingletonApplicationScope.cs">
       <Link>Boot\SingletonApplicationScope.cs</Link>
     </Compile>
@@ -123,6 +144,9 @@
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\ICanBeValidated.cs">
       <Link>ComponentModel\ICanBeValidated.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IContainerBootstrapper.cs">
+      <Link>ComponentModel\IContainerBootstrapper.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IConventionsHandler.cs">
       <Link>ComponentModel\IConventionsHandler.cs</Link>
