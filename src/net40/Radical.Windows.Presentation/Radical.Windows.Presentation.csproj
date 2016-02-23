@@ -45,12 +45,12 @@
     <DocumentationFile>bin\Release\Radical.Windows.Presentation.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Radical, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Radical.1.5.3\lib\net40\Radical.dll</HintPath>
+    <Reference Include="Radical, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Radical.1.6.0-beta0241\lib\net40\Radical.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Radical.Windows, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Radical.Windows.1.4.0\lib\net40\Radical.Windows.dll</HintPath>
+    <Reference Include="Radical.Windows, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Radical.Windows.1.5.0-beta0008\lib\net40\Radical.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -60,7 +60,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Radical.Windows.1.4.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Radical.Windows.1.5.0-beta0008\lib\net40\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xaml">

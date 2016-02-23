@@ -286,6 +286,16 @@ namespace Topics.Radical.Windows.Presentation.Boot
         }
 
         /// <summary>
+        /// Called when the composition container has been composed.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        protected virtual void OnCompositionContainerComposed(CompositionContainer container, IServiceProvider serviceProvider)
+        {
+
+        }
+
+        /// <summary>
         /// Setups the UI composition engine.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
@@ -295,16 +305,6 @@ namespace Topics.Radical.Windows.Presentation.Boot
             RegionService.CurrentService = serviceProvider.GetService<IRegionService>();
 #endif
             RegionService.Conventions = serviceProvider.GetService<IConventionsHandler>();
-        }
-
-        /// <summary>
-        /// Called when the composition container has been composed.
-        /// </summary>
-        /// <param name="container">The container.</param>
-        /// <param name="serviceProvider">The service provider.</param>
-        protected virtual void OnCompositionContainerComposed(CompositionContainer container, IServiceProvider serviceProvider)
-        {
-
         }
 
         Action<Boot.BootstrapConventions> onBeforeInstall;
@@ -629,13 +629,13 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
             Action showShell = () =>
             {
-			    if (this.shellViewType != null)
-			    {
-			        var mainView = (Window) resolver.GetView(this.shellViewType);
-			        Application.Current.MainWindow = mainView;
+                if (this.shellViewType != null)
+                {
+                    var mainView = (Window) resolver.GetView(this.shellViewType);
+                    Application.Current.MainWindow = mainView;
 
-			        mainView.Show();
-			    }
+                    mainView.Show();
+                }
             };
 
             if(this.isSplashScreenEnabled)
@@ -654,7 +654,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 #if FX40
                         Thread.Sleep(remaining);
 #else
-						Task.Delay( remaining );
+                        Task.Delay( remaining );
 #endif
                     }
                 };
@@ -662,7 +662,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 #if FX40
                 var startup = Task.Factory.StartNew(action);
 #else
-				var startup = Task.Run( action );
+                var startup = Task.Run( action );
 #endif
 
                 startup.ContinueWith(t =>
