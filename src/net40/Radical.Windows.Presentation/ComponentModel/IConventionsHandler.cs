@@ -217,13 +217,49 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
         [IgnorePropertyInjectionAttribue]
         Action<DependencyObject, Object> SetViewDataContext { get; set; }
 
-		/// <summary>
-		/// Default: Gets or sets the logic that sets the view data context.
-		/// </summary>
-		/// <value>
-		/// The logic that sets the view data context.
-		/// </value>
-		[IgnorePropertyInjectionAttribue]
+        /// <summary>
+        /// Default: Gets or sets the logic that determines if the ViewModel should be added to the View static resources.
+        /// </summary>
+        /// <value>
+        /// The logic that determines if the ViewModel should be added to the View static resources.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Object, bool> DefaultShouldExposeViewModelAsStaticResource { get; }
+
+        /// <summary>
+        /// Gets or sets the logic that determines if the ViewModel should be added to the View static resources.
+        /// </summary>
+        /// <value>
+        /// The logic that determines if the ViewModel should be added to the View static resources.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Object, bool> ShouldExposeViewModelAsStaticResource { get; set; }
+
+        /// <summary>
+        /// Default: Gets or sets the logic that determines that adds the ViewModel to the View static resources.
+        /// </summary>
+        /// <value>
+        /// The logic that determines that adds the ViewModel to the View static resources.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
+        Action<DependencyObject, Object> DefaultExposeViewModelAsStaticResource { get; }
+
+        /// <summary>
+        /// Gets or sets the logic that determines that adds the ViewModel to the View static resources.
+        /// </summary>
+        /// <value>
+        /// The logic that determines that adds the ViewModel to the View static resources.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
+        Action<DependencyObject, Object> ExposeViewModelAsStaticResource { get; set; }
+
+        /// <summary>
+        /// Default: Gets or sets the logic that sets the view data context.
+        /// </summary>
+        /// <value>
+        /// The logic that sets the view data context.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
 		Action<DependencyObject, Object> DefaultSetViewDataContext { get; }
 
 		/// <summary>
