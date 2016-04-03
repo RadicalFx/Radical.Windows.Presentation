@@ -45,7 +45,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 			this.DefaultIsMessageHandler = t =>
 			{
 #pragma warning disable 618
-				return t.Namespace != null && t.Namespace.IsLike( "*.Messaging.Handlers" ) && ( t.Is<IMessageHandler>() || t.Is<IHandleMessage>() );
+				return t.Namespace != null && t.Namespace.IsLike( new string[] { "*.Messaging.Handlers", "*.Messaging.Handlers.*" } ) && ( t.Is<IMessageHandler>() || t.Is<IHandleMessage>() );
 #pragma warning restore 618
 			};
 			this.IsMessageHandler = t => this.DefaultIsMessageHandler( t );
