@@ -1,0 +1,96 @@
+#
+#     DEVELOPMENT BRANCH
+#
+# build in Debug mode and deploy to MyGet.org as pre-release
+
+- branches:
+    only:
+    - develop
+
+  skip_tags: true
+  configuration: Debug
+  platform: Any CPU
+
+  artifacts:
+    - path: src\build\Debug
+    - path: src\build\nuget\*.nupkg
+
+  cache:
+    - src\packages -> src\**\packages.config
+
+  before_build:
+    - nuget restore "src\Radical.Windows.Presentation.sln"
+
+  build:
+    project: src\Radical.Windows.Presentation.sln
+    verbosity: minimal
+
+  after_build:
+    - md "src\build\nuget"
+    - nuget pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+
+  test:
+    categories:
+      except:
+      - ObjectDumper
+      - AsyncWorker
+
+  deploy:
+  - provider: Environment
+    name: MyGet feed
+    on:
+      branch: develop
+
+#
+#   MASTER BRANCH
+#
+# build in Release mode and deploy to NuGet.org
+- branches:
+    only:
+    - master
+
+  skip_tags: true
+  configuration: Release
+  platform: Any CPU
+
+  artifacts:
+    - path: src\build\Release
+    - path: src\build\nuget\*.nupkg
+
+  cache:
+    - src\packages -> src\**\packages.config
+
+  before_build:
+    - nuget restore "src\Radical.Windows.Presentation.sln"
+
+  build:
+    project: src\Radical.Windows.Presentation.sln
+    verbosity: minimal
+
+  after_build:
+    - md "src\build\nuget"
+    - nuget pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+
+  test:
+    categories:
+      except:
+      - ObjectDumper
+      - AsyncWorker
+
+  deploy:
+  - provider: Environment
+    name: NuGet public feed
+    on:
+      branch: master
+<<<<<<< d741a772edfd86cd4d01b6f8a5aa9e3016b8cf2f
+=======
+      
+  - provider: GitHub    
+    release: $(GitVersion_NuGetVersion)
+    description: 'Release v$(GitVersion_NuGetVersion)'
+    auth_token:
+      secure: 2ijF4OfPYfIUTunubL/Z04ogADL9sx/gKW1jMRNJnAa1OpHZpSvCKmP0gvNs8C7h
+    artifact: /.*\.nupkg/, src\build\Release.zip
+    on:
+      branch: master
+>>>>>>> Update appveyor.yml
