@@ -21,6 +21,7 @@ namespace Topics.Radical.Windows.Presentation.Services
     {
         readonly IMessageBroker broker;
         readonly IReleaseComponents releaser;
+        readonly bool releaserSupportsDispose = false;
         readonly BootstrapConventions bootstrapConventions;
 
         /// <summary>
@@ -33,6 +34,8 @@ namespace Topics.Radical.Windows.Presentation.Services
         {
             this.broker = broker;
             this.releaser = releaser;
+            this.releaserSupportsDispose = releaser.GetType().IsAttributeDefined<SupportComponentDisposeAttribute>();
+
             this.bootstrapConventions = bootstrapConventions;
 
             this.DefaultResolveViewModelType = viewType =>
@@ -78,20 +81,18 @@ namespace Topics.Radical.Windows.Presentation.Services
                         }
 
                         this.releaser.Release(vm);
-                        var disposableViewModel = vm as IDisposable;
-                        if( disposableViewModel != null)
+                        if( !this.releaserSupportsDispose && vm is IDisposable)
                         {
-                            disposableViewModel.Dispose();
+                            ((IDisposable)vm).Dispose();
                         }
                     }
 
                     this.DetachViewBehaviors(view);
 
                     this.releaser.Release(view);
-                    var disposableView = view as IDisposable;
-                    if(disposableView != null)
+                    if(!this.releaserSupportsDispose && view is IDisposable)
                     {
-                        disposableView.Dispose();
+                        ((IDisposable)view).Dispose();
                     }
                 }
             };
