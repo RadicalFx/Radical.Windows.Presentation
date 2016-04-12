@@ -10,14 +10,37 @@ namespace Topics.Radical
     /// <summary>
     /// 
     /// </summary>
-    public class ApplicationBootstrapper : Topics.Radical.Windows.Presentation.Boot.ApplicationBootstrapper
+    public sealed class ApplicationBootstrapper : Topics.Radical.Windows.Presentation.Boot.ApplicationBootstrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationBootstrapper"/> class.
-        /// </summary>
-        public ApplicationBootstrapper()
+        private ApplicationBootstrapper()
         {
-            this.UsingAsContainerBootstrapper(new Windows.Presentation.Boot.PuzzleContainerBootstrapper());
+            //this.UsingAsContainerBootstrapper(new Windows.Presentation.Boot.PuzzleContainerBootstrapper());
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="ApplicationBootstrapper"/> with default configuration.
+        /// </summary>
+        /// <returns></returns>
+        public static ApplicationBootstrapper Create()
+        {
+            return new ApplicationBootstrapper()
+                .UsingAsContainerBootstrapper(new Windows.Presentation.Boot.PuzzleContainerBootstrapper());
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="ApplicationBootstrapper" /> with default configuration.
+        /// </summary>
+        /// <typeparam name="TShellView">The type of the shell.</typeparam>
+        /// <returns></returns>
+        public static ApplicationBootstrapper Create<TShellView>() where TShellView : Window
+        {
+            var bootstrapper = new ApplicationBootstrapper();
+
+            bootstrapper.UsingAsContainerBootstrapper(new Windows.Presentation.Boot.PuzzleContainerBootstrapper());
+            bootstrapper.UsingAsShell<TShellView>();
+
+            return bootstrapper;
+                
         }
 
         /// <summary>
@@ -33,7 +56,7 @@ namespace Topics.Radical
         /// </summary>
         /// <param name="containerBootstrapper">The container bootstrapper.</param>
         /// <returns></returns>
-        public virtual ApplicationBootstrapper UsingAsContainerBootstrapper(IContainerBootstrapper containerBootstrapper)
+        public ApplicationBootstrapper UsingAsContainerBootstrapper(IContainerBootstrapper containerBootstrapper)
         {
             this.ContainerBootstrapper = containerBootstrapper;
 
@@ -90,20 +113,20 @@ namespace Topics.Radical
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TShellView">The type of the shell view.</typeparam>
-    public class ApplicationBootstrapper<TShellView> :
-        ApplicationBootstrapper
-        where TShellView : Window
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationBootstrapper{TShellView}"/> class.
-        /// </summary>
-        public ApplicationBootstrapper()
-        {
-            this.UsingAsShell<TShellView>();
-        }
-    }
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <typeparam name="TShellView">The type of the shell view.</typeparam>
+    //public class ApplicationBootstrapper<TShellView> :
+    //    ApplicationBootstrapper
+    //    where TShellView : Window
+    //{
+    //    /// <summary>
+    //    /// Initializes a new instance of the <see cref="ApplicationBootstrapper{TShellView}"/> class.
+    //    /// </summary>
+    //    public ApplicationBootstrapper()
+    //    {
+    //        this.UsingAsShell<TShellView>();
+    //    }
+    //}
 }
