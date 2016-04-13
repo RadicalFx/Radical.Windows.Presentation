@@ -21,6 +21,7 @@ namespace Topics.Radical.Windows.Presentation.Services
     {
         readonly IMessageBroker broker;
         readonly IReleaseComponents releaser;
+        readonly bool releaserSupportsDispose = false;
         readonly BootstrapConventions bootstrapConventions;
 
         /// <summary>
@@ -33,6 +34,8 @@ namespace Topics.Radical.Windows.Presentation.Services
         {
             this.broker = broker;
             this.releaser = releaser;
+            this.releaserSupportsDispose = releaser.GetType().IsAttributeDefined<SupportComponentDisposeAttribute>();
+
             this.bootstrapConventions = bootstrapConventions;
 
             this.DefaultResolveViewModelType = viewType =>
@@ -78,11 +81,19 @@ namespace Topics.Radical.Windows.Presentation.Services
                         }
 
                         this.releaser.Release(vm);
+                        if( !this.releaserSupportsDispose && vm is IDisposable)
+                        {
+                            ((IDisposable)vm).Dispose();
+                        }
                     }
 
                     this.DetachViewBehaviors(view);
 
                     this.releaser.Release(view);
+                    if(!this.releaserSupportsDispose && view is IDisposable)
+                    {
+                        ((IDisposable)view).Dispose();
+                    }
                 }
             };
 
@@ -246,20 +257,20 @@ namespace Topics.Radical.Windows.Presentation.Services
                 if(window != null)
                 {
 #if SILVERLIGHT
-					EventHandler<System.ComponentModel.ClosingEventArgs> closing = null;
-					closing = ( s, e ) =>
-					{
-						try
-						{
-							closedCallback( window );
-						}
-						finally
-						{
-							window.Closing -= closing;
-						}
-					};
+                    EventHandler<System.ComponentModel.ClosingEventArgs> closing = null;
+                    closing = ( s, e ) =>
+                    {
+                        try
+                        {
+                            closedCallback( window );
+                        }
+                        finally
+                        {
+                            window.Closing -= closing;
+                        }
+                    };
 
-					window.Closing += closing;
+                    window.Closing += closing;
 #else
                     EventHandler closed = null;
                     closed = (s, e) =>
@@ -342,17 +353,17 @@ namespace Topics.Radical.Windows.Presentation.Services
                 this.DefaultAttachViewBehaviors(view);
             };
 #else
-			this.AttachViewBehaviors = view =>
-			{
-				var bhv = Interaction.GetBehaviors( view );
-				//if( view is Page )
-				//{
-				//    bhv.Add( new PageNavigationNotifcationsBehavior( this.broker ) );
-				//}
-				
-				bhv.Add( new FrameworkElementLifecycleNotificationsBehavior( this.broker, this ) );
-				bhv.Add( new DependencyObjectCloseHandlerBehavior( this.broker, this ) );
-			};
+            this.AttachViewBehaviors = view =>
+            {
+                var bhv = Interaction.GetBehaviors( view );
+                //if( view is Page )
+                //{
+                //    bhv.Add( new PageNavigationNotifcationsBehavior( this.broker ) );
+                //}
+                
+                bhv.Add( new FrameworkElementLifecycleNotificationsBehavior( this.broker, this ) );
+                bhv.Add( new DependencyObjectCloseHandlerBehavior( this.broker, this ) );
+            };
 #endif
 
 #if !SILVERLIGHT
@@ -375,12 +386,12 @@ namespace Topics.Radical.Windows.Presentation.Services
                 this.DefaultDetachViewBehaviors(view);
             };
 #else
-			this.DetachViewBehaviors = view =>
-			{
-				var bhv = Interaction.GetBehaviors( view );
-				bhv.OfType<FrameworkElementLifecycleNotificationsBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
-				bhv.OfType<DependencyObjectCloseHandlerBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
-			};
+            this.DetachViewBehaviors = view =>
+            {
+                var bhv = Interaction.GetBehaviors( view );
+                bhv.OfType<FrameworkElementLifecycleNotificationsBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
+                bhv.OfType<DependencyObjectCloseHandlerBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
+            };
 #endif
 
             this.DefaultShouldNotifyViewModelLoaded = (view, dataContext) =>
@@ -404,10 +415,10 @@ namespace Topics.Radical.Windows.Presentation.Services
             this.DefaultShouldNotifyViewLoaded = view =>
             {
                 /*
-				 * we should decide if the attribute must be applied on the view or, as in this fix,
-				 * mainly for backward compatibility, can be applied also on the ViewModel and the
-				 * _View_Loaded message is still broadcasted.
-				 */
+                 * we should decide if the attribute must be applied on the view or, as in this fix,
+                 * mainly for backward compatibility, can be applied also on the ViewModel and the
+                 * _View_Loaded message is still broadcasted.
+                 */
                 //var dataContext = this.GetViewDataContext( view );
                 //var hasAttributeOnViewModel = dataContext != null && dataContext.GetType().IsAttributeDefined<NotifyLoadedAttribute>();
                 var hasAttributeOnView = view.GetType().IsAttributeDefined<NotifyLoadedAttribute>();
