@@ -575,10 +575,6 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <param name="serviceProvider">The service provider.</param>
 		protected virtual void OnBootCompleted( IServiceProvider serviceProvider )
 		{
-			Ensure.That( this.shellViewType )
-				.WithMessage( "Shell type is not defined, please call the UsingAsShell<TShellView>() configuration method." )
-				.IsNotNull();
-
 			var resolver = serviceProvider.GetService<IViewResolver>();
 
 			Func<Window> showSplash = () =>
@@ -622,10 +618,13 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
 			Action showShell = () =>
 			{
-				var mainView = ( Window )resolver.GetView( this.shellViewType );
-				Application.Current.MainWindow = mainView;
+			    if (this.shellViewType != null)
+			    {
+			        var mainView = (Window) resolver.GetView(this.shellViewType);
+			        Application.Current.MainWindow = mainView;
 
-				mainView.Show();
+			        mainView.Show();
+			    }
 			};
 
 			if( this.isSplashScreenEnabled )

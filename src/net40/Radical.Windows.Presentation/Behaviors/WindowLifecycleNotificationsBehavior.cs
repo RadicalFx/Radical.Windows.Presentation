@@ -156,7 +156,10 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
                         logger.Debug( "DataContext.OnViewClosed() invoked." );
 					}
 
-					this.conventions.ViewReleaseHandler( view, ViewReleaseBehavior.Default );
+                    if(this.conventions.ShouldReleaseView(view))
+                    {
+                        this.conventions.ViewReleaseHandler(view, ViewReleaseBehavior.Default);
+                    }
 				};
 
 

@@ -82,7 +82,9 @@
     name: NuGet public feed
     on:
       branch: master
-
+<<<<<<< d741a772edfd86cd4d01b6f8a5aa9e3016b8cf2f
+=======
+      
   - provider: GitHub    
     release: $(GitVersion_NuGetVersion)
     description: 'Release v$(GitVersion_NuGetVersion)'
@@ -91,3 +93,4 @@
     artifact: /.*\.nupkg/, src\build\Release.zip
     on:
       branch: master
+>>>>>>> Update appveyor.yml

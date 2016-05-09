@@ -16,4 +16,15 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <param name="component">The component to release.</param>
 		void Release( Object component );
 	}
+
+
+    /// <summary>
+    /// Signals that a DI container exposed implementing the <see cref="IReleaseComponents"/> 
+    /// interface is capable of disposing components at release time, such as Castle Windsor
+    /// </summary>
+    /// <seealso cref="System.Attribute" />
+    public sealed class SupportComponentDisposeAttribute : Attribute
+    {
+
+    }
 }

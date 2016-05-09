@@ -102,6 +102,10 @@ namespace Topics.Radical.Windows.Presentation.Services
 
                     this.conventions.AttachViewToViewModel( view, viewModel );
                     this.conventions.SetViewDataContext( view, viewModel );
+                    if(this.conventions.ShouldExposeViewModelAsStaticResource(view, viewModel))
+                    {
+                        this.conventions.ExposeViewModelAsStaticResource(view, viewModel);
+                    }
                 }
 
 				//behaviors must be attached regardless of the presence of the view model
