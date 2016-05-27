@@ -69,7 +69,7 @@
 
   after_build:
     - md "src\build\nuget"
-    - nuget pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+    - src\nuget\nuget.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
 
   test:
     categories:
