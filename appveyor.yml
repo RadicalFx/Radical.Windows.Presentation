@@ -31,7 +31,7 @@
 
   after_build:
     - md "src\build\nuget"
-    - "$pwd\tools\NuGet.exe" pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+    - $pwd\tools\NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
 
   test:
     categories:
@@ -78,7 +78,7 @@
 
   after_build:
     - md "src\build\nuget"
-    - "$pwd\tools\NuGet.exe" pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+    - $pwd\tools\NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
 
   test:
     categories:
