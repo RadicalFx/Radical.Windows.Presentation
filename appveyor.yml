@@ -19,8 +19,7 @@
     - src\packages -> src\**\packages.config
     
   install:
-    - md "tools"
-    - ps: iex ((new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/RadicalFx/Build.Support/master/tools/NuGet.exe', 'tools\NuGet.exe'))
+    - ps: iex ((new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/RadicalFx/Build.Support/master/tools/NuGet.exe', 'NuGet.exe'))
 
   before_build:
     - nuget restore "src\Radical.Windows.Presentation.sln"
@@ -31,7 +30,7 @@
 
   after_build:
     - md "src\build\nuget"
-    - tools\NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+    - NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
 
   test:
     categories:
@@ -78,7 +77,7 @@
 
   after_build:
     - md "src\build\nuget"
-    - tools\NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+    - NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
 
   test:
     categories:
