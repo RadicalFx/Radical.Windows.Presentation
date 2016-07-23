@@ -13,6 +13,8 @@ using Topics.Radical.Windows.Presentation.Services.Validation;
 namespace Topics.Radical.Windows.Presentation
 {
     /// <summary>
+    /// TESTING CI
+    /// 
     /// A base abstract ViewModel with builtin support for validation, error notification.
     /// </summary>
     public abstract class AbstractViewModel :
