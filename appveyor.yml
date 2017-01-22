@@ -17,6 +17,10 @@
 
   cache:
     - src\packages -> src\**\packages.config
+    
+  install:
+    - md "$pwd\tools"
+    - ps: iex ((new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/RadicalFx/Build.Support/master/tools/NuGet.exe', '$pwd\tools\NuGet.exe'))
 
   before_build:
     - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v3.2.0/nuget.exe
@@ -28,7 +32,7 @@
 
   after_build:
     - md "src\build\nuget"
-    - nuget pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+    - $pwd\tools\NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
 
   test:
     categories:
@@ -46,6 +50,7 @@
 #   MASTER BRANCH
 #
 # build in Release mode and deploy to NuGet.org
+
 - branches:
     only:
     - master
@@ -60,6 +65,10 @@
 
   cache:
     - src\packages -> src\**\packages.config
+    
+  install:
+    - md "$pwd\tools"
+    - ps: iex ((new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/RadicalFx/Build.Support/master/tools/NuGet.exe', '$pwd\tools\NuGet.exe'))
 
   before_build:
     - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v3.2.0/nuget.exe
@@ -71,7 +80,7 @@
 
   after_build:
     - md "src\build\nuget"
-    - nuget pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+    - $pwd\tools\NuGet.exe pack "src\nuget\Radical.Windows.Presentation.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
 
   test:
     categories:
