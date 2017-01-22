@@ -23,7 +23,7 @@
 
   build:
     project: src\Radical.Windows.Presentation.sln
-    verbosity: minimal
+    verbosity: detailed
 
   after_build:
     - md "src\build\nuget"
