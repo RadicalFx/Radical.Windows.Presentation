@@ -325,6 +325,9 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\RegionInjectionHandler.cs">
       <Link>Services\RegionInjectionHandler.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\ResourcesRegistrationHolder.cs">
+      <Link>Services\ResourcesRegistrationHolder.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\Validation\AbstractValidationService.cs">
       <Link>Services\Validation\AbstractValidationService.cs</Link>
     </Compile>

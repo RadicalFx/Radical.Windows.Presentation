@@ -298,12 +298,30 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		[IgnorePropertyInjectionAttribue]
 		Action<DependencyObject, Object> DefaultAttachViewToViewModel { get; }
 
-		/// <summary>
-		/// Gets the view of the given view model.
-		/// </summary>
-		/// <value>
-		/// The get view of view model handler.
-		/// </value>
+        /// <summary>
+        /// Gets or sets the generate service static resource key convention.
+        /// </summary>
+        /// <value>
+        /// The generate service static resource key convention.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
+        Func<Type, object> GenerateServiceStaticResourceKey { get; set; }
+
+        /// <summary>
+        /// Default: Gets the default generate service static resource key convention.
+        /// </summary>
+        /// <value>
+        /// The default generate service static resource key.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
+        Func<Type, object> DefaultGenerateServiceStaticResourceKey { get; }
+
+        /// <summary>
+        /// Gets the view of the given view model.
+        /// </summary>
+        /// <value>
+        /// The get view of view model handler.
+        /// </value>
         [IgnorePropertyInjectionAttribue]
         Func<Object, DependencyObject> GetViewOfViewModel { get; set; }
 

@@ -155,6 +155,7 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="Properties\XmlnsDefinitions.cs" />
     <Compile Include="ComponentModel\IRegionInjectionHandler.cs" />
+    <Compile Include="Services\ResourcesRegistrationHolder.cs" />
     <Compile Include="Services\ViewModelResolver.cs" />
     <Compile Include="Services\RegionInjectionHandler.cs" />
     <Compile Include="Services\Validation\AbstractValidationService.cs" />

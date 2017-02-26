@@ -16,6 +16,7 @@ using System.Security.Principal;
 using System.Globalization;
 using System.Windows.Markup;
 using Topics.Radical.Helpers;
+using Topics.Radical.Windows.Presentation.Services;
 
 #if !SILVERLIGHT
 using System.Diagnostics;
@@ -364,6 +365,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 			{
 				this.OnBootCompleted( this.serviceProvider );
 
+                ExposeRegisteredAppResources();
+
 				var broker = serviceProvider.TryGetService<IMessageBroker>();
 				if( broker != null )
 				{
@@ -387,6 +390,23 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				this.isBootCompleted = true;
 			}
 		}
+
+        void ExposeRegisteredAppResources()
+        {
+            var holder = (ResourcesRegistrationHolder)serviceProvider.GetService(typeof(ResourcesRegistrationHolder));
+            holder.Registrations = resources;
+            HashSet<Type> services;
+            if (holder.Registrations.TryGetValue(Application.Current.GetType(), out services) && services.Any())
+            {
+                var conventions = (IConventionsHandler)serviceProvider.GetService(typeof(IConventionsHandler));
+                foreach (var type in services)
+                {
+                    var instance = serviceProvider.GetService(type);
+                    var key = conventions.GenerateServiceStaticResourceKey(type);
+                    Application.Current.Resources.Add(key, instance);
+                }
+            }
+        }
 
 		Func<CultureInfo> currentCultureHandler = () => CultureInfo.CurrentCulture;
 
@@ -926,5 +946,62 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		{
 			return this.serviceProvider.GetService( serviceType );
 		}
-	}
+
+        IDictionary<Type, HashSet<Type>> resources = new Dictionary<Type, HashSet<Type>>();
+
+        /// <summary>
+        /// Exposes the given service type as resource in the App resources.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <returns></returns>
+        public ApplicationBootstrapper ExposeAsResource<TService>()
+        {
+            return ExposeAsResource(typeof(TService), Application.Current.GetType());
+        }
+
+        /// <summary>
+        /// Exposes the given service type as resource in the supplied resource owner.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <typeparam name="TView">The type of the view.</typeparam>
+        /// <returns></returns>
+        public ApplicationBootstrapper ExposeAsResource<TService, TView>() where TView : FrameworkElement
+        {
+            return ExposeAsResource(typeof(TService), typeof(TView));
+        }
+
+        ///// <summary>
+        ///// Exposes the given service type as resource in the App resources.
+        ///// </summary>
+        ///// <param name="serviceType">Type of the service.</param>
+        ///// <returns></returns>
+        //internal ApplicationBootstrapper ExposeAsResource(Type serviceType)
+        //{
+        //    return ExposeAsResource(serviceType, Application.Current.GetType());
+        //}
+
+        /// <summary>
+        /// Exposes the given service type as resource in the supplied resource owner.
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
+        /// <param name="resourceOwner">The resource owner.</param>
+        /// <returns></returns>
+        internal ApplicationBootstrapper ExposeAsResource(Type serviceType, Type resourceOwner)
+        {
+            HashSet<Type> types;
+            if (!resources.TryGetValue(resourceOwner, out types))
+            {
+                types = new HashSet<Type>();
+                resources.Add(resourceOwner, new HashSet<Type>());
+            }
+
+            Ensure.That(types)
+                .WithMessage("Supplied service type ({0}) is already exposed as resource in {1}.", serviceType.Name, resourceOwner.Name)
+                .IsFalse(hs => hs.Contains(serviceType));
+
+            types.Add(serviceType);
+            
+            return this;
+        }
+    }
 }

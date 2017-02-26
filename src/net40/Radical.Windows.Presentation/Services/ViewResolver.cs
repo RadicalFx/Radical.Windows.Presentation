@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using Topics.Radical.Validation;
 using Topics.Radical.Windows.Presentation.ComponentModel;
@@ -12,20 +14,23 @@ namespace Topics.Radical.Windows.Presentation.Services
     {
         readonly IServiceProvider container;
         readonly IConventionsHandler conventions;
+        readonly ResourcesRegistrationHolder holder;
         readonly Action<Object> emptyInterceptor = o => { };
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewResolver"/> class.
+        /// Initializes a new instance of the <see cref="ViewResolver" /> class.
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="conventions">The conventions.</param>
-        public ViewResolver( IServiceProvider container, IConventionsHandler conventions )
+        /// <param name="holder">The holder.</param>
+        public ViewResolver( IServiceProvider container, IConventionsHandler conventions, ResourcesRegistrationHolder holder )
         {
             Ensure.That( container ).Named( () => container ).IsNotNull();
             Ensure.That( conventions ).Named( () => conventions ).IsNotNull();
 
             this.container = container;
             this.conventions = conventions;
+            this.holder = holder;
         }
 
         /// <summary>
@@ -113,16 +118,39 @@ namespace Topics.Radical.Windows.Presentation.Services
 				this.conventions.AttachViewBehaviors( view );
             }
 
+            ExposeRegisteredResources(view);
+
             return view;
         }
 
-		///// <summary>
-		///// Releases the given view
-		///// </summary>
-		///// <param name="view">The view to release.</param>
-		//public void Release( DependencyObject view )
-		//{
-		//	throw new NotImplementedException();
-		//}
-	}
+        void ExposeRegisteredResources(DependencyObject view)
+        {
+            HashSet<Type> services;
+            if (holder.Registrations.TryGetValue(view.GetType(), out services) && services.Any())
+            {
+                foreach (var type in services)
+                {
+                    var instance = container.GetService(type);
+                    var key = conventions.GenerateServiceStaticResourceKey(type);
+                    if (view is FrameworkElement)
+                    {
+                        ((FrameworkElement)view).Resources.Add(key, instance);
+                    }
+                    else if (view is FrameworkContentElement)
+                    {
+                        ((FrameworkContentElement)view).Resources.Add(key, instance);
+                    }
+                }
+            }
+        }
+
+        ///// <summary>
+        ///// Releases the given view
+        ///// </summary>
+        ///// <param name="view">The view to release.</param>
+        //public void Release( DependencyObject view )
+        //{
+        //	throw new NotImplementedException();
+        //}
+    }
 }
