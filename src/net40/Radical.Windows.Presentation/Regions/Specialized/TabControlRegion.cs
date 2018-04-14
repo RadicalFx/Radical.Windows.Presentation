@@ -29,21 +29,32 @@ namespace Topics.Radical.Windows.Presentation.Regions
         }
 
         /// <summary>
+        /// Activate automatically the first tab of the region
+        /// </summary>
+        public bool AutoActivateFirstTab { get; set; }
+
+        /// <summary>
         /// Called before the add operation.
         /// </summary>
         /// <param name="view">The view.</param>
-        protected override void OnAdd( DependencyObject view )
+        protected override void OnAdd(DependencyObject view)
         {
             var tabItem = new TabItem();
             tabItem.Content = view;
 
-            var header = this.TryGetHeader( view );
-            if( header != null )
+            var header = this.TryGetHeader(view);
+            if (header != null)
             {
                 tabItem.Header = header;
             }
 
-            this.Element.Items.Add( tabItem );
+            this.Element.Items.Add(tabItem);
+
+            if (this.Element.Items.Count == 1 && this.AutoActivateFirstTab)
+            {
+                this.Activate(tabItem);
+            }
+                
         }
 
         /// <summary>
