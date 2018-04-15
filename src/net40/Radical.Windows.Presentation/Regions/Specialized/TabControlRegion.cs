@@ -39,16 +39,27 @@ namespace Topics.Radical.Windows.Presentation.Regions
         /// <param name="view">The view.</param>
         protected override void OnAdd(DependencyObject view)
         {
-            var tabItem = new TabItem();
-            tabItem.Content = view;
+            if (view == null) throw new ArgumentNullException(nameof(view));
 
-            var header = this.TryGetHeader(view);
-            if (header != null)
+            TabItem tabItem;
+            if (view is TabItem)
             {
-                tabItem.Header = header;
+                tabItem = (TabItem) view;
             }
+            else
+            {
+                tabItem = new TabItem
+                {
+                    Content = view
+                };
 
-            this.Element.Items.Add(tabItem);
+                object header = this.TryGetHeader(view);
+                if (header != null)
+                {
+                    tabItem.Header = header;
+                }                
+                this.Element.Items.Add(tabItem);
+            }
 
             if (this.Element.Items.Count == 1 && this.AutoActivateFirstTab)
             {
