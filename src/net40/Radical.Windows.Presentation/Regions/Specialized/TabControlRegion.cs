@@ -41,20 +41,17 @@ namespace Topics.Radical.Windows.Presentation.Regions
         {
             if (view == null) throw new ArgumentNullException(nameof(view));
 
-            var tabItem = view as TabItem;
-            if (tabItem == null)
+            var tabItem = new TabItem
             {
-                tabItem = new TabItem
-                {
-                    Content = view
-                };
+                Content = view
+            };
 
-                object header = this.TryGetHeader(view);
-                if (header != null)
-                {
-                    tabItem.Header = header;
-                }
+            object header = this.TryGetHeader(view);
+            if (header != null)
+            {
+                tabItem.Header = header;
             }
+   
             this.Element.Items.Add(tabItem);
 
             if (this.Element.Items.Count == 1 && this.AutoActivateFirstTab)
