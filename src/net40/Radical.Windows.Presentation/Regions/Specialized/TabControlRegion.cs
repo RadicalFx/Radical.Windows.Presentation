@@ -23,7 +23,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
         /// Initializes a new instance of the <see cref="TabControlRegion"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        public TabControlRegion(string name)
+        public TabControlRegion( string name )
         {
             this.Name = name;
         }
@@ -39,26 +39,22 @@ namespace Topics.Radical.Windows.Presentation.Regions
         /// <param name="view">The view.</param>
         protected override void OnAdd(DependencyObject view)
         {
-            if (view == null) throw new ArgumentNullException(nameof(view));
+            var tabItem = new TabItem();
+            tabItem.Content = view;
 
-            var tabItem = new TabItem
-            {
-                Content = view
-            };
-
-            object header = this.TryGetHeader(view);
+            var header = this.TryGetHeader(view);
             if (header != null)
             {
                 tabItem.Header = header;
             }
-   
+
             this.Element.Items.Add(tabItem);
 
             if (this.Element.Items.Count == 1 && this.AutoActivateFirstTab)
             {
                 this.Activate(tabItem);
             }
-
+                
         }
 
         /// <summary>
@@ -66,9 +62,9 @@ namespace Topics.Radical.Windows.Presentation.Regions
         /// </summary>
         /// <param name="view">The view.</param>
         /// <returns></returns>
-        protected virtual Object TryGetHeader(DependencyObject view)
+        protected virtual Object TryGetHeader( DependencyObject view )
         {
-            return RegionHeaderedElement.GetHeader(view);
+            return RegionHeaderedElement.GetHeader( view );
         }
 
         /// <summary>
@@ -76,12 +72,12 @@ namespace Topics.Radical.Windows.Presentation.Regions
         /// </summary>
         /// <param name="view">The view.</param>
         /// <param name="reason">The reason.</param>
-        protected override void OnRemove(DependencyObject view, RemoveReason reason)
+        protected override void OnRemove( DependencyObject view, RemoveReason reason )
         {
-            var element = GetElement(view);
-            if (element != null)
+            var element = GetElement( view );
+            if( element != null )
             {
-                this.Element.Items.Remove(element);
+                this.Element.Items.Remove( element );
             }
         }
 
@@ -89,12 +85,12 @@ namespace Topics.Radical.Windows.Presentation.Regions
         /// Activates the specified content.
         /// </summary>
         /// <param name="content">The content.</param>
-        public override void Activate(DependencyObject content)
+        public override void Activate( DependencyObject content )
         {
-            var element = GetElement(content);
-            if (element != null)
+            var element = GetElement( content );
+            if( element != null )
             {
-                this.Element.SelectedIndex = this.Element.Items.IndexOf(element);
+                this.Element.SelectedIndex = this.Element.Items.IndexOf( element );
                 OnActiveContentChanged();
             }
         }
@@ -109,10 +105,10 @@ namespace Topics.Radical.Windows.Presentation.Regions
         {
             get
             {
-                if (this.Element.SelectedIndex == -1) return null;
-                var selectedItem = this.Element.Items[this.Element.SelectedIndex];
+                if( this.Element.SelectedIndex == -1 ) return null;
+                var selectedItem = this.Element.Items[ this.Element.SelectedIndex ];
                 var tabItem = selectedItem as TabItem;
-                if (tabItem != null)
+                if( tabItem != null )
                 {
                     return tabItem.Content as DependencyObject;
                 }
@@ -120,17 +116,17 @@ namespace Topics.Radical.Windows.Presentation.Regions
             }
         }
 
-        private object GetElement(DependencyObject content)
+        private object GetElement( DependencyObject content )
         {
-            if (this.Element.Items.Contains(content))
+            if( this.Element.Items.Contains( content ) )
             {
                 return content;
             }
 
             var element = this.Element.Items
                               .OfType<TabItem>()
-                              .Where(t => t.Content == content)
-                              .FirstOrDefault(t => this.Element.Items.Contains(t));
+                              .Where( t => t.Content == content )
+                              .FirstOrDefault( t => this.Element.Items.Contains( t ) );
             return element;
         }
     }
