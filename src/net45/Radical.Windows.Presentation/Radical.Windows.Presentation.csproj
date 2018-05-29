@@ -238,11 +238,20 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\CloseViewRequest.cs">
       <Link>Messaging\CloseViewRequest.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\Handlers\ShowViewRequestHandler.cs">
+      <Link>Messaging\Handlers\ShowViewRequestHandler.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\Handlers\ViewLoadedHandler.cs">
       <Link>Messaging\Handlers\ViewLoadedHandler.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\Handlers\ViewModelLoadedHandler.cs">
       <Link>Messaging\Handlers\ViewModelLoadedHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ShowDialogViewRequest.cs">
+      <Link>Messaging\ShowDialogViewRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ShowViewRequest.cs">
+      <Link>Messaging\ShowViewRequest.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewLoaded.cs">
       <Link>Messaging\ViewLoaded.cs</Link>

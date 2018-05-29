@@ -116,8 +116,11 @@
     <Compile Include="Messaging\ApplicationShutdownRequested.cs" />
     <Compile Include="Messaging\ApplicationShutdown.cs" />
     <Compile Include="Messaging\ApplicationShutdownCanceled.cs" />
+    <Compile Include="Messaging\Handlers\ShowViewRequestHandler.cs" />
     <Compile Include="Messaging\Handlers\ViewLoadedHandler.cs" />
     <Compile Include="Messaging\Handlers\ViewModelLoadedHandler.cs" />
+    <Compile Include="Messaging\ShowDialogViewRequest.cs" />
+    <Compile Include="Messaging\ShowViewRequest.cs" />
     <Compile Include="Messaging\ViewLoaded.cs" />
     <Compile Include="Messaging\ViewModelActivated.cs" />
     <Compile Include="Messaging\ViewModelClosing.cs" />
