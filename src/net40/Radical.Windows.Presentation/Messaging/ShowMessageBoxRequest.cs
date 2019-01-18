@@ -100,5 +100,69 @@
         /// Specifies the options
         /// </summary>
         public MessageBoxOptions? Options { get; set; }
+
+        /// <summary>Displays a message box that has a message.</summary>
+        /// <param name="messageBoxText">A <see cref="T:System.String" /> that specifies the text to display.</param>
+        public ShowMessageBoxRequest(string messageBoxText)
+        {
+            this.Caption = string.Empty;
+            this.MessageBoxText = messageBoxText;
+        }
+
+        /// <summary>Displays a message box that has a message and title bar caption.</summary>
+        /// <param name="messageBoxText">A <see cref="T:System.String" /> that specifies the text to display.</param>
+        /// <param name="caption">A <see cref="T:System.String" /> that specifies the title bar caption to display.</param>
+        public ShowMessageBoxRequest(string caption, string messageBoxText)
+            :this(messageBoxText)
+        {
+            this.Caption = caption;
+        }
+
+        /// <summary>Displays a message box in front of the specified window. The message box displays a message, title bar caption, and button.</summary>
+        /// <param name="messageBoxText">A <see cref="T:System.String" /> that specifies the text to display.</param>
+        /// <param name="caption">A <see cref="T:System.String" /> that specifies the title bar caption to display.</param>
+        /// <param name="button">A <see cref="T:System.Windows.MessageBoxButton" /> value that specifies which button or buttons to display.</param>
+        public ShowMessageBoxRequest(string caption, string messageBoxText, MessageBoxButton button)
+            : this(caption, messageBoxText)
+        {
+            this.Button = button;
+        }
+
+        /// <summary>Displays a message box in front of the specified window. The message box displays a message, title bar caption, button, and icon.</summary>
+        /// <param name="messageBoxText">A <see cref="T:System.String" /> that specifies the text to display.</param>
+        /// <param name="caption">A <see cref="T:System.String" /> that specifies the title bar caption to display.</param>
+        /// <param name="button">A <see cref="T:System.Windows.MessageBoxButton" /> value that specifies which button or buttons to display.</param>
+        /// <param name="icon">A <see cref="T:System.Windows.MessageBoxImage" /> value that specifies the icon to display.</param>
+        public ShowMessageBoxRequest(string caption, string messageBoxText, MessageBoxButton button, MessageBoxImage icon)
+            : this(caption, messageBoxText, button)
+        {
+            this.Icon = icon;
+        }
+
+        /// <summary>Displays a message box in front of the specified window. The message box displays a message, title bar caption, button, and icon; and accepts a default message box result.</summary>
+        /// <param name="messageBoxText">A <see cref="T:System.String" /> that specifies the text to display.</param>
+        /// <param name="caption">A <see cref="T:System.String" /> that specifies the title bar caption to display.</param>
+        /// <param name="button">A <see cref="T:System.Windows.MessageBoxButton" /> value that specifies which button or buttons to display.</param>
+        /// <param name="icon">A <see cref="T:System.Windows.MessageBoxImage" /> value that specifies the icon to display.</param>
+        /// <param name="defaultResult">A <see cref="T:System.Windows.MessageBoxResult" /> value that specifies the default result of the message box.</param>
+        public ShowMessageBoxRequest(string caption, string messageBoxText, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
+            : this(caption, messageBoxText, button, icon)
+        {
+            this.DefaultResult = defaultResult;
+        }
+
+        /// <summary>Displays a message box in front of the specified window. The message box displays a message, title bar caption, button, and icon; and accepts a default message box result, complies with the specified options.</summary>
+        /// <param name="messageBoxText">A <see cref="T:System.String" /> that specifies the text to display.</param>
+        /// <param name="caption">A <see cref="T:System.String" /> that specifies the title bar caption to display.</param>
+        /// <param name="button">A <see cref="T:System.Windows.MessageBoxButton" /> value that specifies which button or buttons to display.</param>
+        /// <param name="icon">A <see cref="T:System.Windows.MessageBoxImage" /> value that specifies the icon to display.</param>
+        /// <param name="defaultResult">A <see cref="T:System.Windows.MessageBoxResult" /> value that specifies the default result of the message box.</param>
+        /// <param name="options">A <see cref="T:System.Windows.MessageBoxOptions" /> value object that specifies the options.</param>
+        public ShowMessageBoxRequest(string caption, string messageBoxText, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult, MessageBoxOptions options)
+            : this(caption, messageBoxText, button, icon, defaultResult)
+        {
+            this.Options = options;
+        }
+
     }
 }
