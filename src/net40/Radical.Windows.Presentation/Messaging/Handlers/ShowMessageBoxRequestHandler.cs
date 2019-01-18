@@ -18,7 +18,8 @@ namespace Topics.Radical.Windows.Presentation.Messaging.Handlers
         /// <param name="broker"></param>
         public ShowMessageBoxRequestHandler(IMessageBroker broker)
         {
-            this.broker = broker ?? throw new ArgumentNullException(nameof(broker));
+            if (broker == null) throw new ArgumentNullException(nameof(broker));
+            this.broker = broker;
         }
 
         /// <summary>
