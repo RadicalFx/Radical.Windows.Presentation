@@ -87,7 +87,7 @@
         /// <summary>
         /// Specifies the icon to display
         /// </summary>
-        public MessageBoxImage? Image { get; set; }
+        public MessageBoxImage? Icon { get; set; }
         /// <summary>
         /// Specifies which button or buttons to display
         /// </summary>
