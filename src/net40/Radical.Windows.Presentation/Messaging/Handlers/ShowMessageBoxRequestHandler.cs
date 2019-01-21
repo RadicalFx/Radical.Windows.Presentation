@@ -2,6 +2,7 @@
 using System.Windows;
 using Topics.Radical.ComponentModel.Messaging;
 using Topics.Radical.Messaging;
+using Topics.Radical.Validation;
 
 namespace Topics.Radical.Windows.Presentation.Messaging.Handlers
 {
@@ -18,7 +19,7 @@ namespace Topics.Radical.Windows.Presentation.Messaging.Handlers
         /// <param name="broker"></param>
         public ShowMessageBoxRequestHandler(IMessageBroker broker)
         {
-            if (broker == null) throw new ArgumentNullException(nameof(broker));
+            Ensure.That(broker).Named(() => broker).IsNotNull();
             this.broker = broker;
         }
 
