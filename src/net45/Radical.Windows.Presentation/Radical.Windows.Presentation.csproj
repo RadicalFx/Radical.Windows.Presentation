@@ -250,9 +250,6 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ShowMessageBoxRequest.cs">
       <Link>Messaging\ShowMessageBoxRequest.cs</Link>
     </Compile>
-    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ShowMessageBoxResult.cs">
-      <Link>Messaging\ShowMessageBoxResult.cs</Link>
-    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewLoaded.cs">
       <Link>Messaging\ViewLoaded.cs</Link>
     </Compile>

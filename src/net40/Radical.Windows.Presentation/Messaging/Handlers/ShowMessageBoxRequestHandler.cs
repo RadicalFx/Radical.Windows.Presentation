@@ -38,7 +38,8 @@ namespace Topics.Radical.Windows.Presentation.Messaging.Handlers
             var result = MessageBox.Show(message.MessageBoxText, message.Caption, button,
                 icon, defaultResult, options);
 
-            broker.Broadcast(this, new ShowMessageBoxResult(result));
+            message.MessageBoxClosed?.Invoke((ShowMessageBoxRequest.MessageBoxResult)result);
+
         }
     }
 }

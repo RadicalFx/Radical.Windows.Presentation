@@ -1,4 +1,6 @@
-﻿namespace Topics.Radical.Windows.Presentation.Messaging
+﻿using System;
+
+namespace Topics.Radical.Windows.Presentation.Messaging
 {
     /// <summary>
     /// Issue a request to open a message box.
@@ -100,6 +102,11 @@
         /// Specifies the options
         /// </summary>
         public MessageBoxOptions? Options { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Action<MessageBoxResult> MessageBoxClosed { get; set; }
 
         /// <summary>Displays a message box that has a message.</summary>
         /// <param name="messageBoxText">A <see cref="T:System.String" /> that specifies the text to display.</param>
