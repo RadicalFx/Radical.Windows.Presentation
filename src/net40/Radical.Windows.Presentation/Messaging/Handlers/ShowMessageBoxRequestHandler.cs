@@ -9,7 +9,7 @@ namespace Topics.Radical.Windows.Presentation.Messaging.Handlers
     /// <summary>
     /// Handle the ShowMessageBoxRequest message
     /// </summary>
-    public class ShowMessageBoxRequestHandler: AbstractMessageHandler<ShowMessageBoxRequest>, INeedSafeSubscription
+    public class ShowMessageBoxRequestHandler : AbstractMessageHandler<ShowMessageBoxRequest>, INeedSafeSubscription
     {
         private readonly IMessageBroker broker;
 
@@ -30,15 +30,15 @@ namespace Topics.Radical.Windows.Presentation.Messaging.Handlers
         /// <param name="message"></param>
         public override void Handle(object sender, ShowMessageBoxRequest message)
         {
-            MessageBoxImage icon = message.Icon == null ? MessageBoxImage.None : (MessageBoxImage) message.Icon;
-            MessageBoxButton button = message.Button == null ? MessageBoxButton.OK : (MessageBoxButton) message.Button;
-            MessageBoxResult defaultResult = message.DefaultResult == null ? MessageBoxResult.None : (MessageBoxResult) message.DefaultResult;
-            MessageBoxOptions options = message.Options == null ? MessageBoxOptions.None : (MessageBoxOptions) message.Options;
+            var icon = message.Icon == null ? MessageBoxImage.None : (MessageBoxImage)message.Icon;
+            var button = message.Button == null ? MessageBoxButton.OK : (MessageBoxButton)message.Button;
+            var defaultResult = message.DefaultResult == null ? MessageBoxResult.None : (MessageBoxResult)message.DefaultResult;
+            var options = message.Options == null ? MessageBoxOptions.None : (MessageBoxOptions)message.Options;
 
-            MessageBoxResult result = MessageBox.Show(message.MessageBoxText, message.Caption, button,
+            var result = MessageBox.Show(message.MessageBoxText, message.Caption, button,
                 icon, defaultResult, options);
 
-            broker.Broadcast(this,new ShowMessageBoxResult(result));
+            broker.Broadcast(this, new ShowMessageBoxResult(result));
         }
     }
 }
